@@ -1,0 +1,15 @@
+.design1{
+  position: absolute;
+
+
+  margin-left: 200px;
+  margin-right: 100px;
+}
+
+.jumbotron {
+  background-image:url('web3.jpg');
+  height:400px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-bottom:1px solid #ff6a00
+}
