@@ -1,0 +1,46 @@
+body{
+  background-color:#4A3D3A;
+}
+
+.para{
+  position: fixed;
+  display: block;
+  border-radius: 20px;
+  margin-top: 15%;
+  margin-left: 10%;
+
+  width: 35%;
+  height: 50%;
+  padding-left: 20px;
+  padding-top: 20px;
+  padding-right: 20px;
+
+
+}
+.form{
+  position: fixed;
+  display: block;
+  border-radius: 20px;
+  margin-left:60%;
+  margin-top: 10%;
+  background-color: white;
+  width: 20%;
+  height:50%;
+  padding: 5%;
+  font-family: fantasy;
+  color: #555353;
+  font-size: 15px;
+
+}
+.fields{
+  padding-bottom: 15px;
+  width: 100%;
+}
+.form button{
+  width: 100%;
+  height:40px;
+  background-color: #149514;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+}
