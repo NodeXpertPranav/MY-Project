@@ -1,0 +1,57 @@
+.design1{
+  position: absolute;
+  margin-left: 200px;
+  margin-right: 100px;
+}
+
+.jumbotron {
+  background-image:url('web3.jpg');
+  height:400px;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  border-bottom:1px solid #ff6a00
+}
+.design2{
+  position:absolute;
+  width:85%;
+  height:120%;
+  top:40%;
+  left:8%;
+  background:#FBFCFC;
+}
+
+
+.gridmenu {
+    width: 23.481781376518218623481781376518%;
+}
+
+.menuitem {
+    margin: 4.310344827586206896551724137931%;
+    margin-left: 0;
+    margin-top: 0;
+    padding: 4.310344827586206896551724137931%;
+    border-bottom: 1px solid #e9e9e9;
+    cursor: pointer;
+}
+
+.gridbox {
+    margin-right: 0;
+    float: left;
+}
+
+@media only screen and (max-width: 500px) {
+    .gridmenu {
+        width: 100%;
+    }
+
+    .menuitem {
+        margin: 1.0121457489878542510121457489879%;
+        padding: 1.0121457489878542510121457489879%;
+
+    }
+
+    .gridbox {
+        margin-right: 0;
+        float: left;
+    }
+  }
