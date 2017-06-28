@@ -1,0 +1,19 @@
+<html>
+<head> <title> Validation </title>
+</head>
+<body>
+ <form name='form'>
+   Enter Phone Number:<br><br>
+   <input type = 'text' name = 'text1' id = 'text1' placeholder = 'input number' onkeypress = "return keypressHandler(event)"
+       onblur=" return numValidate(event)" minlength='12' maxlength='12'/>
+   <div id = 'error1'> </div>
+
+   <br><br>
+   Enter IP address:<br><br>
+   <input type = 'text' name ='text2' id='text2' placeholder = 'input IP adress' onkeypress = "return numOnly(event)"
+      minlength = '14' maxlength = "14"/>
+   <div id='error2'> </div>
+   <script src='validate.js'> </script>
+ </form>
+</body>
+</html>
