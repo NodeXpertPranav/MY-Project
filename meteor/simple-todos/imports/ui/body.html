@@ -1,5 +1,15 @@
 <body>
-  <div class="container">
+  <div class = "container">
+    {{> parentTemplate}}
+  </div>
+</body>
+
+<template name = "parentTemplate">
+  {{>Template.dynamic template = top}}
+  {{>Template.dynamic template = main}}
+</template>
+
+<template name ="head">
     <header>
       <h1>Todo List</h1>
       <h1>Todo List ({{incompleteCount}})</h1>
@@ -14,11 +24,39 @@
        </form>
      {{/if}}
     </header>
+</template>
+
+<template name = "foot">
     <ul>
       {{list}}
       {{#each tasks}}
         {{> task}}
       {{/each}}
     </ul>
-  </div>
-</body>
+</template>
+
+<template name ="subhead">
+    <header>
+      <h1>Todo Listttttt</h1>
+      {{help}}
+      <h1>Todo List ({{incompleteCount}})</h1>
+
+    
+       {{> loginButtons}}
+       {{#if currentUser}}
+
+       <form class="sub-task">
+         <input type="text" name="text" placeholder="Type to add new tasks" />
+       </form>
+     {{/if}}
+    </header>
+</template>
+
+<template name = "subfoot">
+    <ul>
+      {{list}}
+      {{#each subtasks}}
+        {{> subtask}}
+      {{/each}}
+    </ul>
+</template>
