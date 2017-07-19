@@ -1,0 +1,57 @@
+<body>
+  <div class="container">
+    {{> head}}
+    {{> Today}}
+    {{> ThisWeek}}
+    {{> Later}}
+ </div>
+</body>
+
+<template name = "head">
+  <header>
+    <h1>Add Task</h1>
+     <form class="new-task">
+       <input type="text" name="text" placeholder="Type to add new tasks" />
+       <input type="date" name ="date"/>
+     </form>
+  </header>
+</template>
+
+<template name = "Today">
+  <h1> Todays Task </h1>
+    <ul>
+     {{#each tasks}}
+       {{> todaytask}}
+     {{/each}}
+   </ul>
+</template>
+
+<template name="todaytask">
+  <li>{{text}}</li>
+</template>
+
+<template name = "ThisWeek">
+  <h1> This Week Task </h1>
+  <ul>
+   {{#each tasks1}}
+     {{> thisweektask}}
+   {{/each}}
+ </ul>
+</template>
+
+<template name="thisweektask">
+  <li>{{text}}</li>
+</template>
+
+<template name = "Later">
+  <h1> Later Task </h1>
+  <ul>
+   {{#each tasks2}}
+     {{> latertask}}
+   {{/each}}
+ </ul>
+</template>
+
+<template name="latertask">
+  <li>{{text}}</li>
+</template>
