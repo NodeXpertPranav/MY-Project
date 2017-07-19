@@ -1,7 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
-export const subTasks = new Mongo.Collection('Subtasks');
+import {subTasks} from './collections.js';
+
 if (Meteor.isServer) {
   // This code only runs on the server
   Meteor.publish('subtasks', function tasksPublication() {
@@ -21,7 +22,7 @@ Meteor.methods({
     if (! Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
-    
+
       subTasks.insert({
       text,
       parentId: taskId,

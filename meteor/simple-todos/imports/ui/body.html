@@ -34,29 +34,3 @@
       {{/each}}
     </ul>
 </template>
-
-<template name ="subhead">
-    <header>
-      <h1>Todo Listttttt</h1>
-      {{help}}
-      <h1>Todo List ({{incompleteCount}})</h1>
-
-    
-       {{> loginButtons}}
-       {{#if currentUser}}
-
-       <form class="sub-task">
-         <input type="text" name="text" placeholder="Type to add new tasks" />
-       </form>
-     {{/if}}
-    </header>
-</template>
-
-<template name = "subfoot">
-    <ul>
-      {{list}}
-      {{#each subtasks}}
-        {{> subtask}}
-      {{/each}}
-    </ul>
-</template>

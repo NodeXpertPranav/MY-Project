@@ -1,8 +1,43 @@
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-
+import { subTasks } from '../api/collections.js';
 import './subtask.html';
 import './body.html';
+
+Template.subfoot.onCreated(function bodyOnCreated() {
+  this.state = new ReactiveDict();
+  Meteor.subscribe('subtasks');
+});
+
+Template.subfoot.helpers({
+  subtasks() {
+    const instance = Template.instance();
+    return subTasks.find({parentId:FlowRouter.current().params.taskid}, { sort: { createdAt: -1 } });
+  },
+
+});
+Template.subhead.events({
+  'submit .sub-task'(event) {
+    let set = Meteor.settings.public.limit;
+    console.log(set);
+    // Prevent default browser form submit
+    event.preventDefault();
+
+    // Get value from form element
+    const target = event.target;
+    const text = target.text.value;
+    console.log(text);
+
+    // Insert a task into the collection
+    Meteor.call('subtasks.insert', text, FlowRouter.current().params.taskid,set);
+    // Clear form
+    target.text.value = '';
+  },
+  'change .hide-completed input'(event, instance) {
+    instance.state.set('hideCompleted', event.target.checked);
+  },
+});
+
 Template.subtask.helpers({
   isOwner() {
     return this.owner === Meteor.userId();
