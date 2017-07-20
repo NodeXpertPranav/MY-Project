@@ -3,6 +3,8 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 import {Tasks} from './collections.js';
 
+
+
 if (Meteor.isServer) {
   // This code only runs on the server
   Meteor.publish('tasks', function tasksPublication() {
@@ -20,9 +22,9 @@ Meteor.methods({
     check(text, String);
 
     // Make sure the user is logged in before inserting a task
-    if (! Meteor.userId()) {
-      throw new Meteor.Error('not-authorized');
-    }
+    // if (! Meteor.userId()) {
+    //   throw new Meteor.Error('not-authorized');
+    // }
 
     Tasks.insert({
       text,
@@ -44,6 +46,7 @@ Meteor.methods({
 
     Tasks.update(taskId, { $set: { checked: setChecked } });
   },
+
   'tasks.setPrivate'(taskId, setToPrivate) {
       check(taskId, String);
       check(setToPrivate, Boolean);
@@ -51,9 +54,9 @@ Meteor.methods({
       const task = Tasks.findOne(taskId);
 
       // Make sure only the task owner can make a task private
-      if (task.owner !== Meteor.userId()) {
-        throw new Meteor.Error('not-authorized');
-      }
+      // if (task.owner !== Meteor.userId()) {
+      //   throw new Meteor.Error('not-authorized');
+      // }
 
       Tasks.update(taskId, { $set: { private: setToPrivate } });
     },
