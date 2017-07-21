@@ -1,23 +1,33 @@
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import { assert } from 'meteor/practicalmeteor:chai';
-
+import { sinon } from 'meteor/practicalmeteor:sinon';
 import { Tasks } from './collections.js';
 import './tasks.js';
 
 if (Meteor.isServer) {
   describe('Tasks', () => {
     describe('methods', () => {
-      const userId = Random.id();
+      const userId = sinon.stub(Meteor, "userId", ()=> {
+        let id = "PGditkbw2Y5ZkaNkt";
+        return id;
+      });
+
+      const userName = sinon.stub(Meteor, "user", ()=> {
+        let name = "tmeasday";
+        return name;
+      });
+
       let taskId;
 
+    describe('Remove', ()=> {
       beforeEach(() => {
         Tasks.remove({});
         taskId = Tasks.insert({
           text: 'test task',
           createdAt: new Date(),
           owner: userId,
-          username: 'tmeasday',
+          username: userName,
         });
       });
 
@@ -35,31 +45,30 @@ if (Meteor.isServer) {
       // Verify that the method does what we expected
       assert.equal(Tasks.find().count(), 0);
       });
+   });
 
-      // beforeEach(() => {
-      //   Tasks.remove({});
-      // //  taskId = Tasks.insert({
-      //   //  text: 'test task',
-      //     //createdAt: new Date(),
-      //   //  owner: userId,
-      //   //  username: 'tmeasday',
-      //   //});
-      // });
-      //
-      // it('can insert owned task', () => {
-      //   const insertTask = Meteor.server.method_handlers['tasks.insert'];
-      //   const invocation = { userId };
-      //   insertTask.apply(invocation, ["pranav"]);
-      //   assert.equal(Tasks.find().count(), 1);
-      // });
+    describe('insert', () => {
+        beforeEach(() => {
+        Tasks.remove({});
+        });
 
+      it('can insert owned task', () => {
+        const insertTask = Meteor.server.method_handlers['tasks.insert'];
+        const invocation = { userId };
+        insertTask.apply(invocation, ["pranav"]);
+        assert.equal(Tasks.find().count(), 1);
+      });
+  });
+
+
+   describe('checked', () => {
       beforeEach(() => {
         Tasks.remove({});
         taskId = Tasks.insert({
           text: 'test task',
           createdAt: new Date(),
           owner: userId,
-          username: 'tmeasday',
+          username: userName,
         });
       });
 
@@ -69,14 +78,16 @@ if (Meteor.isServer) {
         checkedTask.apply(invocation, [taskId, !this.cheked]);
         assert.equal(Tasks.find({checked : true }).count(), 1);
       });
+  });
 
+  describe('private', () => {
       beforeEach(() => {
         Tasks.remove({});
         taskId = Tasks.insert({
           text: 'test task',
           createdAt: new Date(),
           owner: userId,
-          username: 'tmeasday',
+          username: userName,
         });
       });
 
@@ -86,7 +97,7 @@ if (Meteor.isServer) {
         setPrivateTask.apply(invocation, [taskId, !this.private]);
         assert.equal(Tasks.find({private : true }).count(), 1);
       });
-
+     });
    });
   });
 }

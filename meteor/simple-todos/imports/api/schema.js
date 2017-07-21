@@ -34,7 +34,12 @@ Meteor.methods({
 
   'subtasks.remove'(taskId) {
     check(taskId, String);
-
+    // const subtask = subTasks.findOne(taskId);
+    // console.log("meteor",Meteor.userId());
+    // console.log("owner",subtask.owner);
+    // if(Meteor.userId !== subtask.owner){
+    //   throw new Meteor.console.error('not-authorized');
+    // }
     subTasks.remove(taskId);
   },
 
