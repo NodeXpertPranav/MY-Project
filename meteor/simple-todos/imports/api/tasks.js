@@ -23,16 +23,16 @@ Meteor.methods({
 
     console.log(Meteor);
   // Make sure the user is logged in before inserting a task
-    // if (! Meteor.userId()) {
-    //
-    //   throw new Meteor.Error('not-authorized');
-    // }
+    if (! Meteor.userId()) {
+
+      throw new Meteor.Error('not-authorized');
+    }
 
     Tasks.insert({
       text,
       createdAt: new Date(),
        owner: Meteor.userId(),
-      username: Meteor.user().username,
+       username: Meteor.user().username,
     });
   },
 
@@ -60,9 +60,9 @@ Meteor.methods({
 
       const task = Tasks.findOne(taskId);
         //  Make sure only the task owner can make a task private
-      // if (task.owner !== Meteor.userId()) {
-      //   throw new Meteor.Error('not-authorized');
-      // }
+      if (task.owner !== Meteor.userId()) {
+        throw new Meteor.Error('not-authorized');
+      }
 
       Tasks.update(taskId, { $set: { private: setToPrivate } });
     },

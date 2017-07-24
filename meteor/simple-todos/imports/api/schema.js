@@ -16,13 +16,22 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  'subtasks.insert'(text,taskId,set) {
+  'subtasks.insert'(text,taskId) {
     check(text, String);
             // Make sure the user is logged in before inserting a task
+    const limit = Meteor.settings.public.limit;
+    console.log(limit);
+
     if (! Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
 
+      let count = subTasks.find({parentId: taskId}).count()+1;
+      console.log(count);
+
+      if(count>limit){
+        throw new Meteor.console.error("exceed");
+      }
       subTasks.insert({
       text,
       parentId: taskId,
@@ -56,9 +65,9 @@ Meteor.methods({
       const task = subTasks.findOne(taskId);
 
       // Make sure only the task owner can make a task private
-      // if (task.owner !== Meteor.userId()) {
-      //   throw new Meteor.Error('not-authorized');
-      // }
+      if (task.owner !== Meteor.userId()) {
+        throw new Meteor.Error('not-authorized');
+      }
 
       subTasks.update(taskId, { $set: { private: setToPrivate } });
     },

@@ -18,18 +18,21 @@ Template.subfoot.helpers({
 });
 Template.subhead.events({
   'submit .sub-task'(event) {
-    let set = Meteor.settings.public.limit;
-    console.log(set);
+
     // Prevent default browser form submit
     event.preventDefault();
 
     // Get value from form element
     const target = event.target;
     const text = target.text.value;
-    console.log(text);
+
 
     // Insert a task into the collection
-    Meteor.call('subtasks.insert', text, FlowRouter.current().params.taskid,set);
+    Meteor.call('subtasks.insert', text, FlowRouter.current().params.taskid, function(err,res){
+     if(err){
+         alert("Limit can exceed");
+     }
+    });
     // Clear form
     target.text.value = '';
   },

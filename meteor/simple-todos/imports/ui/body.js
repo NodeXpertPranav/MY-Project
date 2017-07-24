@@ -1,15 +1,3 @@
-// import { Template } from 'meteor/templating';
-//
-// import './body.html';
-//
-// Template.body.helpers({
-//   tasks: [
-//     { text: 'This is task 1' },
-//     { text: 'This is task 2' },
-//     { text: 'This is task 3' },
-//     { text: 'This is task 4' },
-//   ],
-// });
 import { Template } from 'meteor/templating';
 import { ReactiveDict } from 'meteor/reactive-dict';
 import { Tasks } from '../api/collections.js';
@@ -46,6 +34,7 @@ Template.head.events({
     const target = event.target;
     const text = target.text.value;
 
+    
     // Insert a task into the collection
     Meteor.call('tasks.insert', text);
     // Clear form
