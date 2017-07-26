@@ -12,8 +12,10 @@ export default class Submit extends Component {
 
 
  handleSubmit(event) {
-   alert('A name was submitted: ' + this.state.value);
+  //  alert('A name was submitted: ' + this.state.value);
+  
    event.preventDefault();
+
  }
 
 

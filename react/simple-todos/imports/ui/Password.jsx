@@ -6,7 +6,11 @@ export default class Password extends Component {
     return (
       <label>
         Password:
-      &nbsp;  <input type="password" />
+      &nbsp;
+      <input
+      type="password"
+      ref = {node => this.textPass =node}
+       />
       </label>
     );
   }

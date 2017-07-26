@@ -4,13 +4,10 @@ export default class TextArea extends Component {
 
   render() {
     return (
-
       <label>
       About You!: &nbsp;
-      <textarea name="description"  />
-
+      <textarea ref = {node => this.textArea =node} />
       </label>
-
     );
   }
 

@@ -6,8 +6,11 @@ export default class Email extends Component {
     return (
       <label>
         Email:
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" placeholder = "Enter your Email Adress"/>
-
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input
+         type="email"
+         ref = {node => this.textEmail = node}
+         placeholder = "Enter your Email Adress"/>
       </label>
     );
   }

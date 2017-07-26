@@ -7,7 +7,11 @@ export default class Phone_No extends Component {
 
       <label>
         Phone No.:
-      &nbsp;  <input type="text" placeholder = "Enter your phone number"/>
+      &nbsp;
+       <input
+       type="text"
+       ref = {node => this.textPhone =node}
+       placeholder = "Enter your phone number"/>
       </label>
 
     );
