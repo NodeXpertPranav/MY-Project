@@ -60,6 +60,8 @@ export default class NameForm extends Component {
     this.textEmail.textEmail.value = '';
     this.textPass.textPass.value = '';
     this.textArea.textArea.value = '';
+    this.textPhone.textPhone.value = '';
+
   }
   render() {
     return (
