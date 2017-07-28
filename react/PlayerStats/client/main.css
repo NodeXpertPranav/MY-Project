@@ -21,8 +21,8 @@ body {
    background-color: white;
    margin-left:50px;
    margin-right : 2cm;
-   width: inherit;
-   height: 1000px;
+   width: 200;
+   height: inherit;
   }
 input {
   margin-left: 40px;
