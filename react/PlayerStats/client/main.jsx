@@ -21,7 +21,6 @@ class Main extends Component{
 }
 
 Meteor.startup(() => {
-
   render(
     (<BrowserRouter>
         <div>

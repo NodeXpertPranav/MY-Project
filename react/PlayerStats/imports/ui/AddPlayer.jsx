@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
 import { Tasks } from '../api/tasks.js';
 import Input from './Inputs/TextInput.jsx';
 import CheckBox from './Inputs/CheckBox.jsx';
@@ -57,6 +58,7 @@ export default class AddPlayer extends Component {
           }
           else{
             console.log("Inserted in Databse");
+            alert("Data is Successfully insertd into databse")
           }
         });
     }
@@ -69,11 +71,11 @@ export default class AddPlayer extends Component {
         <h1> Fill all the Detail of a player </h1>
 
         <b>Enter First Name:</b> &nbsp;&nbsp;&nbsp;
-        <Input type ="text"  placeholder = "enter your first name"  ref = {node => this.firstName = node}/>
+        <Input type ="text" name ='FirstName' placeholder = "enter your first name"  ref = {node => this.firstName = node}/>
         <br/> <br/>
 
         <b>Enter Last Name:</b> &nbsp;&nbsp;&nbsp;
-        <Input type ="text" placeholder = "enter your name last name" ref = {node => this.lastName = node}/>
+        <Input type ="text" name ="LastName" placeholder = "enter your name last name"  ref = {node => this.lastName = node}/>
         <br/> <br/>
 
         <b>Enter Date of Birth:</b>
@@ -85,27 +87,27 @@ export default class AddPlayer extends Component {
         <br/> <br/>
 
         <b>Birth Place: </b>&nbsp;&nbsp;&nbsp;
-        <Input type ="text" placeholder ="Enter Birth Place" ref = {node => this.birthPlace = node} />
+        <Input type ="text" name = "BirthPlace" placeholder ="Enter Birth Place" ref = {node => this.birthPlace = node} />
         <br/><br/>
 
         <b>No of Runs Scored </b>
-        <Input type ="number" placeholder = "Total Run Scored" ref ={node => this.totalScore =node}/>
+        <Input type ="text" name = "TotalScore" placeholder = "Total Run Scored" ref ={node => this.totalScore =node}/>
         <br/> <br/>
 
         <b>No of Centuries </b>
-        <Input type ="number" placeholder = "Total Number of Centuries" ref ={node => this.century =node}/>
+        <Input type ="text" name= "Century" placeholder = "Total Number of Centuries"  ref ={node => this.century =node}/>
         <br/> <br/>
 
         <b>No of Half Centuries </b>
-        <Input type ="number" placeholder = "Total Number of Half Centuries" ref ={node => this.halfCentury =node}/>
+        <Input type ="text" name= "HalfCentury" placeholder = "Total Number of Half Centuries" ref ={node => this.halfCentury =node}/>
         <br/> <br/>
 
         <b>No of Boundries </b>
-        <Input type ="number" placeholder = "Total Boundries" ref ={node => this.boundry =node}/>
+        <Input type ="text" name= "Boundry" placeholder = "Total Boundries" ref ={node => this.boundry =node}/>
         <br/> <br/>
 
         <b>No of Sixes </b>
-        <Input type ="number" placeholder = "Total Sixes" ref ={node => this.six =node}/>
+        <Input type ="text" name="Six" placeholder = "Total Sixes" ref ={node => this.six =node}/>
         <br/> <br/>
 
         <b>Profile Picture: </b>
@@ -113,6 +115,7 @@ export default class AddPlayer extends Component {
         <br/> <br/>
 
         <input type = "submit" value = "submit" />
+        
         </div>
       </form>
 

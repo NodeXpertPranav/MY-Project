@@ -14,17 +14,30 @@ export  class ShowPlayer extends Component{
 
   render(){
     return (
-      <div>
-        <h1> Player Detail </h1>
-        <ul>
-        {this.renderTasks()}
-        </ul>
-        </div>
+        <table>
+        <tbody>
+        <tr>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>DOB</th>
+          <th>Role</th>
+          <th>Birth Place</th>
+          <th>Total Score</th>
+          <th>Century</th>
+          <th>Half Century</th>
+          <th>Boundry</th>
+          <th>Sixes</th>
+        </tr>
+          {this.renderTasks()}
+          </tbody>
+        </table>
+
     );
   }
 }
 
 export default createContainer(() => {
+  Meteor.subscribe('tasks');
   return {
     tasks: Tasks.find({}).fetch(),
   };

@@ -19,11 +19,37 @@ body {
 
  div{
    background-color: white;
-   margin-left:50px;
-   margin-right : 2cm;
-   width: 200;
-   height: inherit;
-  }
+   margin-left: 1em;
+   margin-right :1em;
+   margin-top : 1cm;
+   margin-bottom:1cm;
+
+   }
+
 input {
   margin-left: 40px;
+}
+
+table {
+   font-family: Times New Roman, sans-serif;
+   color: black;
+   border-collapse: collapse;
+   width: 100%;
+   background-color: white;
+}
+
+th {
+   border: 1px solid BLACK;
+   text-align: left;
+   padding: 8px;
+}
+td {
+   border: 1px solid BLACK;
+   text-align: left;
+   padding: 8px;
+}
+
+tr:nth-child(odd) {
+   color:white;
+   background-color: #9ACD32;
 }
