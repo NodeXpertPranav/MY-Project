@@ -6,10 +6,17 @@ import Task from './Task.jsx';
 export  class ShowPlayer extends Component{
 
   renderTasks = ()=> {
-      console.log(this.props.tasks);
+      //console.log(this.props.tasks);
       return this.props.tasks.map((task) => (
         <Task key={task._id} task={task} />
     ));
+  }
+  renderHeader= ()=> {
+    const header = ['First Name', 'Last Name', 'DOB', 'Role', 'Birth Place', 'Total Score',
+                    'Century', 'Half Century', 'Boundry', 'Six'];
+    return header.map((item, key)=>{
+      return <th key ={key} > {item} </th>
+    });
   }
 
   render(){
@@ -17,16 +24,7 @@ export  class ShowPlayer extends Component{
         <table>
         <tbody>
         <tr>
-          <th>FirstName</th>
-          <th>LastName</th>
-          <th>DOB</th>
-          <th>Role</th>
-          <th>Birth Place</th>
-          <th>Total Score</th>
-          <th>Century</th>
-          <th>Half Century</th>
-          <th>Boundry</th>
-          <th>Sixes</th>
+        {this.renderHeader()}
         </tr>
           {this.renderTasks()}
           </tbody>

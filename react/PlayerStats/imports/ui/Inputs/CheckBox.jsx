@@ -5,7 +5,7 @@ export default class CheckBox extends Component {
   render() {
     return (
       <label>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      
         <input
           type={this.props.type}
           placeholder={this.props.placeholder}

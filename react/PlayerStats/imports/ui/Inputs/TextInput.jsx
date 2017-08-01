@@ -13,19 +13,14 @@ export default class TextInput extends Component {
  //  }
  // VALIDATION OF TEXT INPUT FIELD
  checkAlpha = (event)=>{
-   console.log("inside checkAlpha");
+
    const alpha = /^[a-zA-Z]+$/;
    let x =event.target.value.length;
    if(x<=10){
      if(!alpha.test(event.target.value)){
-       event.preventDefault();
-       event.stopPropagation();
-       console.log("if part");
-       return false;
+         return false;
       }
-       console.log("else part");
-       console.log(this.state.valid);
-       return true;
+     return true;
    } else{
       alert("Limit can Not Exceed to 20 chracter")
       event.preventDefault();
@@ -34,7 +29,7 @@ export default class TextInput extends Component {
 
  checkNumber =(event)=>{
    let x =event.target.value.length;
-   console.log("inside checkNumber");
+
    if(x<=10){
      const number = /^[0-9]+$/;
      if(!number.test(event.target.value)){
@@ -47,7 +42,7 @@ export default class TextInput extends Component {
  }
 
  handleChange= (event) =>{
-   console.log(event.target.value);
+   
   switch (this.props.name){
     case 'FirstName' : this.setState({ valid: this.checkAlpha(event),message :this.state.valid==true?'':"Only Text Field is allowed"})
           break;
