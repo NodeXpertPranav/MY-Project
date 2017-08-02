@@ -13,7 +13,7 @@ export  class ShowPlayer extends Component{
   }
   renderHeader= ()=> {
     const header = ['First Name', 'Last Name', 'DOB', 'Role', 'Birth Place', 'Total Score',
-                    'Century', 'Half Century', 'Boundry', 'Six'];
+                    'Century', 'Half Century', 'Boundry', 'Six' ,'Edit'];
     return header.map((item, key)=>{
       return <th key ={key} > {item} </th>
     });

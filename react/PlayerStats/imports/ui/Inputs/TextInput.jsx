@@ -42,7 +42,7 @@ export default class TextInput extends Component {
  }
 
  handleChange= (event) =>{
-   
+
   switch (this.props.name){
     case 'FirstName' : this.setState({ valid: this.checkAlpha(event),message :this.state.valid==true?'':"Only Text Field is allowed"})
           break;
@@ -73,6 +73,7 @@ export default class TextInput extends Component {
           placeholder={this.props.placeholder}
           ref = {node => this.textInput = node}
           name = {this.props.name}
+          defaultValue ={this.props.value}
           onChange ={this.handleChange}
           />
         {this.state.message}

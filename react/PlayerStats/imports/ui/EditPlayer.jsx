@@ -8,33 +8,34 @@ import SelectBox from './Inputs/SelectBox.jsx';
 import ShowPlayer from './ShowPlayer.jsx';
 
 
+
 export default class AddPlayer extends Component {
 
   constructor(props){
     super(props);
-    const _id = this.props.match.params.id;
-    console.log(_id);
-    const field = Tasks.find({_id}).fetch();
-    console.log(field[0].FirstName);
+
+  //  console.log(_id);
+    //const field = Tasks.find({_id}).fetch();
+    //console.log(field[0].FirstName);
     this.state ={
-      redirectToNewPage: false,
-      firstName : field[0].FirstName,
-      lastName : field[0].LastName,
-      dob : field[0].DOB,
-      role : field[0].Role,
-      birthPlace :field[0].BirthPlace,
-      totalScore : field[0].TotalScore,
-      century : field[0].Century,
-      halfCentury :field[0].HalfCentury,
-      boundry: field[0].boundry,
-      six: field[0].Six,
+      loading : true,
+      firstName : '',
+      lastName : '',
+      dob : '',
+      role : '',
+      birthPlace :'',
+      totalScore : '',
+      century : '',
+      halfCentury :'',
+      boundry: '',
+      six: '',
     };
-    console.log(this.state.redirectToNewPage);
+
   }
 
 
     handleSubmit = (event)=>{
-      event.preventDefault()
+      event.preventDefault();
 
       const firstName = this.firstName.textInput.value;
       const lastName = this.lastName.textInput.value;
@@ -59,105 +60,104 @@ export default class AddPlayer extends Component {
       console.log('BOundry is: '+boundry);
       console.log('Six is: '+six);
 
-
-
       //inserting task to Databse
-      Tasks.update({_id: this.props.match.params.id},
-          {$set :{
-          FirstName : firstName,
-          LastName : lastName,
-          DOB :dob,
-          Role :role,
-          BirthPlace :birthPlace,
-          TotalScore : totalScore,
-          Century :century,
-          HalfCentury : halfCentury,
-          boundry : boundry,
-          Six :six,
-          createdAt: new Date(), // current time
-        }}, function(err,res){
-          if(err){
-            console.log("some Error");
-          }
-          else{
-            console.log("Updated in Databse");
-            //this.setState({ redirectToNewPage: true });
-            console.log(this.state.redirectToNewPage);
-          }
-        });
+        const _id = this.props.match.params.id;
+      Meteor.call('tasks.update',_id, firstName,lastName,dob,role,birthPlace,totalScore,century,halfCentury,boundry,six, (err, res) => {
+        if(err){
+          console.log(err);
+        }
+        else{
+          alert ("data updated successfully");
+        }
+      });
+
     }
 
 
-    componentDidMount(){
-      this.firstName.textInput.value=this.state.firstName;
-      this.lastName.textInput.value= this.state.lastName;
-      this.dob.textInput.value = this.state.dob;
-      this.textOption.textOption.value=this.state.role;
-      this.birthPlace.textInput.value=this.state.birthPlace;
-      this.totalScore.textInput.value=this.state.totalScore;
-      this.century.textInput.value= this.state.century;
-      this.halfCentury.textInput.value= this.state.halfCentury;
-      this.boundry.textInput.value= this.state.boundry;
-      this.boundry.textInput.value= this.state.six;
+    componentWillMount(){
+      const id = this.props.match.params.id;
+      Meteor.call('fetchField',id,(err,data)  => {
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log("inside will mount");
+          this.setState(
+            {
+              firstName : data.FirstName,
+              lastName : data.LastName,
+              dob : data.DOB,
+              role : data.Role,
+              birthPlace :data.BirthPlace,
+              totalScore : data.TotalScore,
+              century : data.Century,
+              halfCentury :data.HalfCentury,
+              boundry: data.boundry,
+              six: data.Six,
+              loading : false
+            }
+          );
+        }
+      });
     }
 
   render() {
-    return (
-
-      <form onSubmit = {this.handleSubmit}>
+      if(this.state.loading){
+      return <div> loading</div>
+      }
+      return(
+        <form onSubmit = {this.handleSubmit}>
         <div >
         <h1> Fill all the Detail of a player </h1>
 
         <b>Enter First Name:</b> &nbsp;&nbsp;&nbsp;
-        <Input type ="text" name ='FirstName' placeholder = "enter your first name"  ref = {node => this.firstName = node}/>
+        <Input type ="text" name ='FirstName' value = {this.state.firstName} placeholder = "enter your first name"  ref = {node => this.firstName = node}/>
         &nbsp;<CheckBox type ="checkbox" />
         <br/> <br/>
 
         <b>Enter Last Name:</b> &nbsp;&nbsp;&nbsp;
-        <Input type ="text" name ="LastName" placeholder = "enter your name last name"  ref = {node => this.lastName = node}/>
+        <Input type ="text" name ="LastName" value = {this.state.lastName} placeholder = "enter your name last name"  ref = {node => this.lastName = node}/>
         &nbsp;<CheckBox type ="checkbox" />
         <br/> <br/>
 
         <b>Enter Date of Birth:</b>
-        <Input type ="date" placeholder = "dd/mm/yyyy " ref ={node => this.dob = node}/>
+        <Input type ="date" value = {this.state.dob} placeholder = "dd/mm/yyyy " ref ={node => this.dob = node}/>
         &nbsp;<CheckBox type ="checkbox" />
         <br/> <br/>
 
         <b>Role: </b> &nbsp;&nbsp;
-        <SelectBox ref = {node => this.textOption =node}/>
+        <SelectBox value = {this.state.role} ref = {node => this.textOption =node}/>
         <br/> <br/>
 
         <b>Birth Place: </b>&nbsp;&nbsp;&nbsp;
-        <Input type ="text" name = "BirthPlace" placeholder ="Enter Birth Place" ref = {node => this.birthPlace = node} />
+        <Input type ="text" name = "BirthPlace" value = {this.state.birthPlace} placeholder ="Enter Birth Place" ref = {node => this.birthPlace = node} />
         &nbsp;<CheckBox type ="checkbox" />
         <br/><br/>
 
         <b>No of Runs Scored </b>
-        <Input type ="text" name = "TotalScore" placeholder = "Total Run Scored" ref ={node => this.totalScore =node}/>
+        <Input type ="text" name = "TotalScore" value = {this.state.totalScore} placeholder = "Total Run Scored" ref ={node => this.totalScore =node}/>
         <br/> <br/>
 
         <b>No of Centuries </b>
-        <Input type ="text" name= "Century" placeholder = "Total Number of Centuries"  ref ={node => this.century =node}/>
+        <Input type ="text" name= "Century" value = {this.state.century} placeholder = "Total Number of Centuries"  ref ={node => this.century =node}/>
         <br/> <br/>
 
         <b>No of Half Centuries </b>
-        <Input type ="text" name= "HalfCentury" placeholder = "Total Number of Half Centuries" ref ={node => this.halfCentury =node}/>
+        <Input type ="text" name= "HalfCentury" value = {this.state.halfCentury} placeholder = "Total Number of Half Centuries" ref ={node => this.halfCentury =node}/>
         <br/> <br/>
 
         <b>No of Boundries </b>
-        <Input type ="text" name= "Boundry" placeholder = "Total Boundries" ref ={node => this.boundry =node}/>
+        <Input type ="text" name= "Boundry" value = {this.state.boundry} placeholder = "Total Boundries" ref ={node => this.boundry =node}/>
         <br/> <br/>
 
         <b>No of Sixes </b>
-        <Input type ="text" name="Six" placeholder = "Total Sixes" ref ={node => this.six =node}/>
+        <Input type ="text" name="Six" value = {this.state.six} placeholder = "Total Sixes" ref ={node => this.six =node}/>
         <br/> <br/>
 
         <b>Profile Picture: </b>
         <Input type ="file"/>
         <br/> <br/>
-
         <input type = "submit" value = "save" />
-
         </div>
       </form>
 

@@ -28,5 +28,29 @@ Meteor.methods({
         createdAt: new Date(),
     });
   },
-  
+
+  'tasks.update'(id,firstName,lastName,dd,role,birthPlace,totalScore,century,halfCentury,boundry,six ){
+    console.log("in update method");
+    Tasks.update({_id:id},
+        {$set :
+          {
+            FirstName : firstName,
+            LastName : lastName,
+            DOB :dd,
+            Role :role,
+            BirthPlace :birthPlace,
+            TotalScore : totalScore,
+            Century :century,
+            HalfCentury : halfCentury,
+            boundry : boundry,
+            Six :six,
+            createdAt: new Date(), // current time
+          }
+        }
+      );
+  },
+
+  'fetchField'(id){
+    return Tasks.findOne({_id:id});
+  }
 });
